@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Fonts loaded via Google Fonts in layout ── */
+:root {
+  --font-display: 'DM Serif Display', serif;
+  --font-body: 'Outfit', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-salt-50 text-salt-900 font-body;
+  }
+
+  h1, h2, h3 {
+    @apply font-display;
+  }
+
+  ::selection {
+    @apply bg-accent/20 text-accent-dark;
+  }
+}
+
+@layer components {
+  .container-site {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-sm bg-accent px-6 py-3 text-sm font-semibold tracking-wide text-white uppercase transition-all hover:bg-accent-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-sm border-2 border-salt-900 px-6 py-3 text-sm font-semibold tracking-wide text-salt-900 uppercase transition-all hover:bg-salt-900 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-salt-900 focus-visible:ring-offset-2;
+  }
+
+  .input-field {
+    @apply w-full border border-salt-300 bg-white px-4 py-3 text-salt-900 placeholder:text-salt-400 transition-colors focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent;
+  }
+
+  .section-heading {
+    @apply text-3xl sm:text-4xl font-display tracking-tight;
+  }
+
+  .section-subheading {
+    @apply text-salt-500 mt-2 text-lg max-w-2xl;
+  }
+
+  /* Grain overlay for texture */
+  .grain::after {
+    content: '';
+    @apply pointer-events-none fixed inset-0 z-50 opacity-[0.03];
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+/* Product image hover zoom */
+.product-card-image {
+  @apply transition-transform duration-500 ease-out;
+}
+.product-card:hover .product-card-image {
+  @apply scale-105;
+}

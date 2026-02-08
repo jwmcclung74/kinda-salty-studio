@@ -1,0 +1,162 @@
+{
+  "listings": [
+    {
+      "id": "sample-001",
+      "slug": "custom-3d-printed-dragon-miniature",
+      "title": "Custom 3D Printed Dragon Miniature",
+      "description": "Beautifully detailed dragon miniature, 3D printed in high-quality PLA. Perfect for tabletop gaming, display shelves, or as a unique gift. Available in multiple colors. Each piece is carefully printed and cleaned for the best finish.",
+      "price": 24.99,
+      "currency": "USD",
+      "images": [
+        {
+          "url": "/images/placeholder-product.svg",
+          "alt": "Custom 3D Printed Dragon Miniature",
+          "width": 800,
+          "height": 800,
+          "rank": 0
+        }
+      ],
+      "tags": ["3d print", "dragon", "miniature", "tabletop", "gaming", "pla", "figurine"],
+      "materials": ["PLA", "Biodegradable Plastic"],
+      "category": "3d-prints",
+      "createdAt": "2025-01-15T00:00:00Z",
+      "updatedAt": "2025-01-15T00:00:00Z",
+      "listingUrl": "https://www.etsy.com/shop/KindaSaltyStudio",
+      "quantity": 10,
+      "isAvailable": true,
+      "shopSection": "3D Prints"
+    },
+    {
+      "id": "sample-002",
+      "slug": "laser-engraved-wooden-coaster-set",
+      "title": "Laser Engraved Wooden Coaster Set",
+      "description": "Set of 4 beautifully laser engraved wooden coasters. Each coaster features intricate geometric patterns cut with precision. Made from sustainably sourced birch plywood with a natural finish. Perfect housewarming gift.",
+      "price": 32.00,
+      "currency": "USD",
+      "images": [
+        {
+          "url": "/images/placeholder-product.svg",
+          "alt": "Laser Engraved Wooden Coaster Set",
+          "width": 800,
+          "height": 800,
+          "rank": 0
+        }
+      ],
+      "tags": ["laser engraved", "coasters", "wood", "geometric", "home decor", "gift"],
+      "materials": ["Birch Plywood", "Wood"],
+      "category": "laser-engraving",
+      "createdAt": "2025-02-01T00:00:00Z",
+      "updatedAt": "2025-02-01T00:00:00Z",
+      "listingUrl": "https://www.etsy.com/shop/KindaSaltyStudio",
+      "quantity": 15,
+      "isAvailable": true,
+      "shopSection": "Laser Engraving"
+    },
+    {
+      "id": "sample-003",
+      "slug": "personalized-laser-cut-name-sign",
+      "title": "Personalized Laser Cut Name Sign",
+      "description": "Custom laser cut name sign made from premium birch wood. Perfect for nurseries, bedrooms, or as a personalized gift. Available in multiple fonts and sizes. Each sign is carefully cut and sanded for a smooth finish.",
+      "price": 45.00,
+      "currency": "USD",
+      "images": [
+        {
+          "url": "/images/placeholder-product.svg",
+          "alt": "Personalized Laser Cut Name Sign",
+          "width": 800,
+          "height": 800,
+          "rank": 0
+        }
+      ],
+      "tags": ["laser cut", "name sign", "personalized", "wood", "nursery", "custom"],
+      "materials": ["Birch Wood"],
+      "category": "laser-engraving",
+      "createdAt": "2025-02-10T00:00:00Z",
+      "updatedAt": "2025-02-10T00:00:00Z",
+      "listingUrl": "https://www.etsy.com/shop/KindaSaltyStudio",
+      "quantity": 20,
+      "isAvailable": true,
+      "shopSection": "Laser Engraving"
+    },
+    {
+      "id": "sample-004",
+      "slug": "3d-printed-articulated-octopus",
+      "title": "3D Printed Articulated Octopus",
+      "description": "Fun and fidget-friendly articulated octopus, fully 3D printed in one piece — no assembly required! Tentacles move and flex. Great desk toy, stress reliever, or quirky gift. Available in a rainbow of colors.",
+      "price": 18.50,
+      "currency": "USD",
+      "images": [
+        {
+          "url": "/images/placeholder-product.svg",
+          "alt": "3D Printed Articulated Octopus",
+          "width": 800,
+          "height": 800,
+          "rank": 0
+        }
+      ],
+      "tags": ["3d print", "articulated", "octopus", "fidget", "toy", "desk toy", "pla"],
+      "materials": ["PLA"],
+      "category": "3d-prints",
+      "createdAt": "2025-01-20T00:00:00Z",
+      "updatedAt": "2025-01-20T00:00:00Z",
+      "listingUrl": "https://www.etsy.com/shop/KindaSaltyStudio",
+      "quantity": 25,
+      "isAvailable": true,
+      "shopSection": "3D Prints"
+    },
+    {
+      "id": "sample-005",
+      "slug": "laser-engraved-pet-memorial-ornament",
+      "title": "Laser Engraved Pet Memorial Ornament",
+      "description": "A touching laser engraved pet memorial ornament. Personalized with your pet's name and dates. Made from quality birch wood with a ribbon hanger included. A beautiful way to remember a beloved companion.",
+      "price": 22.00,
+      "currency": "USD",
+      "images": [
+        {
+          "url": "/images/placeholder-product.svg",
+          "alt": "Laser Engraved Pet Memorial Ornament",
+          "width": 800,
+          "height": 800,
+          "rank": 0
+        }
+      ],
+      "tags": ["laser engraved", "pet memorial", "ornament", "personalized", "wood", "memorial"],
+      "materials": ["Birch Wood"],
+      "category": "laser-engraving",
+      "createdAt": "2025-03-01T00:00:00Z",
+      "updatedAt": "2025-03-01T00:00:00Z",
+      "listingUrl": "https://www.etsy.com/shop/KindaSaltyStudio",
+      "quantity": 30,
+      "isAvailable": true,
+      "shopSection": "Laser Engraving"
+    },
+    {
+      "id": "sample-006",
+      "slug": "3d-printed-geometric-planter",
+      "title": "3D Printed Geometric Planter",
+      "description": "Modern geometric planter, 3D printed with a matte finish. Features a drainage hole and built-in saucer. Perfect for succulents and small plants. Unique honeycomb pattern adds a contemporary touch to any space.",
+      "price": 19.99,
+      "currency": "USD",
+      "images": [
+        {
+          "url": "/images/placeholder-product.svg",
+          "alt": "3D Printed Geometric Planter",
+          "width": 800,
+          "height": 800,
+          "rank": 0
+        }
+      ],
+      "tags": ["3d print", "planter", "geometric", "succulent", "home decor", "modern", "pla"],
+      "materials": ["PLA", "Biodegradable Plastic"],
+      "category": "3d-prints",
+      "createdAt": "2025-02-15T00:00:00Z",
+      "updatedAt": "2025-02-15T00:00:00Z",
+      "listingUrl": "https://www.etsy.com/shop/KindaSaltyStudio",
+      "quantity": 12,
+      "isAvailable": true,
+      "shopSection": "3D Prints"
+    }
+  ],
+  "fetchedAt": "2025-03-15T00:00:00Z",
+  "source": "file"
+}
