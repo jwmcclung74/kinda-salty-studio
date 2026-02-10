@@ -17,7 +17,7 @@ export default function CustomOrdersPage() {
         <p className="section-subheading mb-4">
           Have a specific idea? We love custom projects. Tell us what you&apos;re looking for and we&apos;ll work together to make it happen.
         </p>
-        <div className="mb-8 rounded-sm border border-salt-200 bg-salt-50 p-4">
+        <div className="mb-8 rounded border border-accent/20 bg-accent/5 p-4">
           <h2 className="text-sm font-semibold text-salt-900 mb-2">How it works</h2>
           <ol className="text-sm text-salt-600 space-y-1 list-decimal list-inside">
             <li>Submit your idea below with as much detail as possible.</li>
