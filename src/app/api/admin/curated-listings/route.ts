@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 
 function authorize(req: NextRequest): boolean {
   const token =
@@ -82,6 +83,17 @@ export async function POST(req: NextRequest) {
       const listingId = listingIds[i];
       await sql`INSERT INTO curated_listings (listing_id, category, sort_order) VALUES (${listingId}, ${category}, ${i})`;
     }
+
+    // Revalidate the category page so changes appear immediately
+    const pathMap: Record<string, string> = {
+      '3d-prints': '/3d-prints',
+      'laser-engraving': '/laser-engraving',
+    };
+    if (pathMap[category]) {
+      revalidatePath(pathMap[category]);
+    }
+    // Also revalidate the home page in case it shows featured products
+    revalidatePath('/');
 
     return NextResponse.json({
       message: `Saved ${listingIds.length} listings for ${category}.`,
