@@ -8,9 +8,8 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'All fields required.' }, { status: 400 });
     }
 
-    const contactEmail = process.env.CONTACT_EMAIL || 'hello@kindasaltystudio.com';
     await sendEmail({
-      to: contactEmail,
+      to: 'jwmcclung@gmail.com',
       subject: `[Contact] ${subject}`,
       html: `<p><strong>From:</strong> ${name} (${email})</p><p><strong>Subject:</strong> ${subject}</p><hr/><p>${message.replace(/\n/g, '<br/>')}</p>`,
       replyTo: email,

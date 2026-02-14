@@ -35,15 +35,15 @@
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-sm bg-accent px-6 py-3 text-sm font-semibold tracking-wide text-white uppercase transition-all hover:bg-accent-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2;
+    @apply inline-flex items-center justify-center gap-2 rounded bg-accent px-6 py-3 text-sm font-semibold tracking-wide text-white uppercase transition-all hover:bg-accent-dark hover:shadow-lg hover:shadow-accent/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-sm border-2 border-salt-900 px-6 py-3 text-sm font-semibold tracking-wide text-salt-900 uppercase transition-all hover:bg-salt-900 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-salt-900 focus-visible:ring-offset-2;
+    @apply inline-flex items-center justify-center gap-2 rounded border-2 border-salt-700 px-6 py-3 text-sm font-semibold tracking-wide text-salt-700 uppercase transition-all hover:bg-salt-700 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-salt-700 focus-visible:ring-offset-2;
   }
 
   .input-field {
-    @apply w-full border border-salt-300 bg-white px-4 py-3 text-salt-900 placeholder:text-salt-400 transition-colors focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent;
+    @apply w-full rounded border border-salt-300 bg-white px-4 py-3 text-salt-900 placeholder:text-salt-400 transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20;
   }
 
   .section-heading {

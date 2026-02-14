@@ -82,7 +82,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
         <div className="grid gap-10 lg:grid-cols-2">
           {/* Images */}
           <div className="space-y-4">
-            <div className="relative aspect-square overflow-hidden bg-salt-100">
+            <div className="relative aspect-square overflow-hidden rounded bg-salt-100">
               <Image
                 src={listing.images[0]?.url || '/images/placeholder-product.svg'}
                 alt={listing.images[0]?.alt || listing.title}
@@ -92,8 +92,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 priority
               />
               {!listing.isAvailable && (
-                <div className="absolute inset-0 flex items-center justify-center bg-salt-900/50">
-                  <span className="rounded-sm bg-salt-900 px-4 py-2 text-sm font-semibold uppercase tracking-wider text-white">
+                <div className="absolute inset-0 flex items-center justify-center bg-salt-700/60">
+                  <span className="rounded bg-salt-700 px-4 py-2 text-sm font-semibold uppercase tracking-wider text-white">
                     Sold Out
                   </span>
                 </div>
@@ -123,7 +123,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
               {listing.title}
             </h1>
 
-            <p className="mt-4 text-3xl font-display text-salt-900">
+            <p className="mt-4 text-3xl font-display text-accent-dark">
               {formatPrice(listing.price, listing.currency)}
             </p>
 

@@ -15,9 +15,11 @@ interface Listing {
 
 type CuratedMap = Record<string, string[]>;
 
-export function AdminPanel() {
-  const [token, setToken] = useState('');
-  const [authenticated, setAuthenticated] = useState(false);
+interface AdminPanelProps {
+  token: string;
+}
+
+export function AdminPanel({ token }: AdminPanelProps) {
   const [listings, setListings] = useState<Listing[]>([]);
   const [curated, setCurated] = useState<CuratedMap>({});
   const [loading, setLoading] = useState(false);
@@ -49,8 +51,6 @@ export function AdminPanel() {
         const curatedData = await curatedRes.json();
         setCurated(curatedData.curated || {});
       }
-
-      setAuthenticated(true);
     } catch (err) {
       setMessage({ text: err instanceof Error ? err.message : 'Failed to load', type: 'error' });
     } finally {
@@ -58,10 +58,9 @@ export function AdminPanel() {
     }
   }, []);
 
-  function handleLogin(e: React.FormEvent) {
-    e.preventDefault();
-    if (token.trim()) loadData(token.trim());
-  }
+  useEffect(() => {
+    if (token) loadData(token);
+  }, [token, loadData]);
 
   function isSelected(category: string, listingId: string): boolean {
     return curated[category]?.includes(listingId) ?? false;
@@ -102,41 +101,29 @@ export function AdminPanel() {
     }
   }
 
-  // Login screen
-  if (!authenticated) {
+  if (loading && listings.length === 0) {
+    return <div className="px-6 py-12 text-center text-sm text-salt-500">Loading listings...</div>;
+  }
+
+  if (listings.length === 0 && !loading) {
     return (
-      <form onSubmit={handleLogin} className="max-w-md">
-        <label className="block text-sm font-medium text-salt-700 mb-2">
-          Admin Token
-        </label>
-        <div className="flex gap-3">
-          <input
-            type="password"
-            value={token}
-            onChange={(e) => setToken(e.target.value)}
-            placeholder="Enter your admin token"
-            className="input-field flex-1"
-          />
-          <button type="submit" disabled={loading} className="btn-primary">
-            {loading ? 'Loading...' : 'Sign In'}
-          </button>
-        </div>
-        {message && (
-          <p className={`mt-3 text-sm ${message.type === 'error' ? 'text-red-600' : 'text-green-600'}`}>
-            {message.text}
-          </p>
-        )}
-      </form>
+      <div className="px-6 py-12 text-center text-sm text-salt-500">
+        No Etsy listings found. Make sure your ETSY_API_KEY and ETSY_SHOP_ID are configured.
+      </div>
     );
   }
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-12 p-6">
       {message && (
-        <div className={`rounded-sm px-4 py-3 text-sm ${message.type === 'error' ? 'bg-red-50 text-red-700' : 'bg-green-50 text-green-700'}`}>
+        <div className={`rounded px-4 py-3 text-sm ${message.type === 'error' ? 'bg-red-50 text-red-700' : 'bg-green-50 text-green-700'}`}>
           {message.text}
         </div>
       )}
+
+      <p className="text-sm text-salt-500">
+        Select which Etsy listings appear on each category page. Click a listing to toggle it, then save.
+      </p>
 
       {categories.map((cat) => {
         const selectedIds = curated[cat.slug] || [];
@@ -165,13 +152,13 @@ export function AdminPanel() {
                   <button
                     key={listing.id}
                     onClick={() => toggleListing(cat.slug, listing.id)}
-                    className={`text-left rounded-sm border-2 p-2 transition-all ${
+                    className={`text-left rounded border-2 p-2 transition-all ${
                       selected
                         ? 'border-accent bg-accent/5 ring-1 ring-accent'
                         : 'border-salt-200 hover:border-salt-400'
                     }`}
                   >
-                    <div className="relative aspect-square overflow-hidden bg-salt-100 rounded-sm mb-2">
+                    <div className="relative aspect-square overflow-hidden bg-salt-100 rounded mb-2">
                       <Image
                         src={listing.images[0]?.url || '/images/placeholder-product.svg'}
                         alt={listing.images[0]?.alt || listing.title}
@@ -188,7 +175,7 @@ export function AdminPanel() {
                       )}
                       {!listing.isAvailable && (
                         <div className="absolute bottom-2 left-2">
-                          <span className="bg-salt-900/80 text-white text-[10px] font-semibold uppercase px-1.5 py-0.5 rounded-sm">
+                          <span className="bg-salt-900/80 text-white text-[10px] font-semibold uppercase px-1.5 py-0.5 rounded">
                             Sold Out
                           </span>
                         </div>

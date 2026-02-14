@@ -44,7 +44,7 @@ export function EmailSignup({ source, variant = 'default' }: EmailSignupProps) {
 
   if (status === 'success') {
     return (
-      <div className={variant === 'compact' ? 'text-sm text-green-600' : 'rounded-sm border border-green-200 bg-green-50 p-4 text-center text-green-800'}>
+      <div className={variant === 'compact' ? 'text-sm text-accent-light' : 'rounded border border-green-200 bg-green-50 p-4 text-center text-green-800'}>
         ✓ {message}
       </div>
     );
@@ -61,7 +61,7 @@ export function EmailSignup({ source, variant = 'default' }: EmailSignupProps) {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="your@email.com"
-          className="input-field flex-1 py-2 text-sm"
+          className="w-full rounded border border-salt-600 bg-salt-800 px-3 py-2 text-sm text-white placeholder:text-salt-500 transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 flex-1"
           disabled={status === 'loading'}
         />
         <button type="submit" className="btn-primary py-2 text-xs" disabled={status === 'loading'}>
