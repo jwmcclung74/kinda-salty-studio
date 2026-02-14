@@ -88,6 +88,7 @@ export async function POST(req: NextRequest) {
     const pathMap: Record<string, string> = {
       '3d-prints': '/3d-prints',
       'laser-engraving': '/laser-engraving',
+      'featured': '/',
     };
     if (pathMap[category]) {
       revalidatePath(pathMap[category]);

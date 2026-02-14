@@ -252,6 +252,38 @@ export async function getCuratedListingsByCategory(category: string): Promise<No
   }
 }
 
+export async function getFeaturedListings(): Promise<NormalizedListing[]> {
+  const listings = await getListings();
+
+  if (!process.env.POSTGRES_URL) {
+    return [];
+  }
+
+  try {
+    const { sql } = await import('@vercel/postgres');
+    await sql`CREATE TABLE IF NOT EXISTS curated_listings (
+      id SERIAL PRIMARY KEY,
+      listing_id VARCHAR(50) NOT NULL,
+      category VARCHAR(50) NOT NULL,
+      sort_order INTEGER DEFAULT 0,
+      created_at TIMESTAMP DEFAULT NOW(),
+      UNIQUE(listing_id, category)
+    )`;
+
+    const result = await sql`SELECT listing_id FROM curated_listings WHERE category = 'featured' ORDER BY sort_order`;
+    const featuredIds = result.rows.map((r) => r.listing_id);
+
+    if (featuredIds.length === 0) return [];
+
+    return featuredIds
+      .map((id) => listings.find((l) => l.id === id))
+      .filter((l): l is NormalizedListing => l != null);
+  } catch (err) {
+    console.error('Featured listings query failed:', err);
+    return [];
+  }
+}
+
 export async function getRelatedListings(listing: NormalizedListing, limit: number = 4): Promise<NormalizedListing[]> {
   const all = await getListings();
   const scored = all
