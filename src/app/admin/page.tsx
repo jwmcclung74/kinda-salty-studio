@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import { AdminPanel } from '@/components/AdminPanel';
 
 interface Subscriber {
   id: number;
@@ -28,7 +29,7 @@ export default function AdminPage() {
   const [token, setToken] = useState('');
   const [tokenInput, setTokenInput] = useState('');
   const [authenticated, setAuthenticated] = useState(false);
-  const [tab, setTab] = useState<'subscribers' | 'orders'>('subscribers');
+  const [tab, setTab] = useState<'subscribers' | 'orders' | 'listings'>('subscribers');
   const [subscribers, setSubscribers] = useState<Subscriber[]>([]);
   const [orders, setOrders] = useState<CustomOrder[]>([]);
   const [selectedOrder, setSelectedOrder] = useState<CustomOrder | null>(null);
@@ -125,6 +126,7 @@ export default function AdminPage() {
     const params = new URLSearchParams(window.location.search);
     const urlTab = params.get('tab');
     if (urlTab === 'orders') setTab('orders');
+    if (urlTab === 'listings') setTab('listings');
   }, []);
 
   useEffect(() => {
@@ -496,6 +498,16 @@ export default function AdminPage() {
               </span>
             )}
           </button>
+          <button
+            onClick={() => { setTab('listings'); setSearch(''); setError(''); }}
+            className={`px-4 py-2.5 text-sm font-medium transition-colors border-b-2 -mb-px ${
+              tab === 'listings'
+                ? 'border-accent text-accent'
+                : 'border-transparent text-salt-500 hover:text-salt-700'
+            }`}
+          >
+            Listings
+          </button>
         </div>
 
         {/* ===================== SUBSCRIBERS TAB ===================== */}
@@ -685,6 +697,19 @@ export default function AdminPage() {
                 </table>
               </div>
             )}
+          </div>
+        )}
+
+        {/* ===================== LISTINGS TAB ===================== */}
+        {tab === 'listings' && (
+          <div className="border border-salt-200 bg-white">
+            <div className="border-b border-salt-200 px-6 py-4">
+              <h2 className="font-display text-xl tracking-tight">Manage Listings</h2>
+              <p className="text-sm text-salt-500 mt-0.5">
+                Choose which Etsy listings appear on the 3D Prints and Laser Engraving pages.
+              </p>
+            </div>
+            <AdminPanel token={token} />
           </div>
         )}
       </section>
