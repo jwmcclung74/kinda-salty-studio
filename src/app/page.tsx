@@ -1,21 +1,22 @@
 import Link from 'next/link';
-import { getListings, getListingsByCategory } from '@/lib/listings';
-import { siteConfig } from '@/lib/site.config';
+import { getListingsByCategory, getFeaturedListings } from '@/lib/listings';
 import { ProductGrid } from '@/components/ProductGrid';
 import { EmailSignup } from '@/components/EmailSignup';
+import { FeaturedCarousel } from '@/components/FeaturedCarousel';
 
 export const revalidate = 21600; // 6 hours
 
 export default async function HomePage() {
-  const allListings = await getListings();
   const prints = await getListingsByCategory('3d-prints');
   const laser = await getListingsByCategory('laser-engraving');
+  const featuredListings = await getFeaturedListings();
 
-  // Featured: use configured IDs or latest 4
-  const featured =
-    siteConfig.featuredListingIds.length > 0
-      ? allListings.filter((l) => siteConfig.featuredListingIds.includes(l.id))
-      : allListings.slice(0, 4);
+  const featuredProducts = featuredListings.map((l) => ({
+    id: l.id,
+    slug: l.slug,
+    title: l.title,
+    image: { url: l.images[0]?.url || '/images/placeholder-product.svg', alt: l.images[0]?.alt || l.title },
+  }));
 
   return (
     <>
@@ -35,26 +36,35 @@ export default async function HomePage() {
           }}
         />
         <div className="container-site relative py-24 sm:py-32 lg:py-40">
-          <div className="max-w-3xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-accent mb-4">
-              Handcrafted with precision
-            </p>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display leading-[1.1] tracking-tight">
-              3D Prints &<br />
-              Laser Engravings<br />
-              <span className="text-accent">Made to Last</span>
-            </h1>
-            <p className="mt-6 text-lg text-salt-300 max-w-xl leading-relaxed">
-              Unique designs crafted from digital precision — functional prints, custom engravings, and personalized gifts made by hand in small batches.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <Link href="/shop" className="btn-primary">
-                Browse All Products
-              </Link>
-              <Link href="/custom-orders" className="inline-flex items-center gap-2 rounded border-2 border-white/20 px-6 py-3 text-sm font-semibold tracking-wide uppercase transition-all hover:border-accent hover:bg-accent/10 hover:text-accent">
-                Custom Orders
-              </Link>
+          <div className={`${featuredProducts.length > 0 ? 'grid lg:grid-cols-2 gap-12 items-center' : ''}`}>
+            <div className="max-w-3xl">
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-accent mb-4">
+                Handcrafted with precision
+              </p>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display leading-[1.1] tracking-tight">
+                3D Prints &<br />
+                Laser Engravings<br />
+                <span className="text-accent">Made to Last</span>
+              </h1>
+              <p className="mt-6 text-lg text-salt-300 max-w-xl leading-relaxed">
+                Unique designs crafted from digital precision — functional prints, custom engravings, and personalized gifts made by hand in small batches.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-4">
+                <Link href="/shop" className="btn-primary">
+                  Browse All Products
+                </Link>
+                <Link href="/custom-orders" className="inline-flex items-center gap-2 rounded border-2 border-white/20 px-6 py-3 text-sm font-semibold tracking-wide uppercase transition-all hover:border-accent hover:bg-accent/10 hover:text-accent">
+                  Custom Orders
+                </Link>
+              </div>
             </div>
+
+            {/* Featured Products Carousel */}
+            {featuredProducts.length > 0 && (
+              <div className="mt-10 lg:mt-0">
+                <FeaturedCarousel products={featuredProducts} />
+              </div>
+            )}
           </div>
         </div>
         {/* Bottom orange accent line */}
@@ -100,23 +110,6 @@ export default async function HomePage() {
               </svg>
             </div>
           </Link>
-        </div>
-      </section>
-
-      {/* ── Featured Products ── */}
-      <section className="container-site pb-20">
-        <div className="flex items-end justify-between mb-8">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent mb-1">Fresh off the printer</p>
-            <h2 className="section-heading">Featured Products</h2>
-          </div>
-          <Link href="/shop" className="text-sm font-semibold text-salt-500 hover:text-accent transition-colors hidden sm:inline-flex items-center gap-1">
-            View All →
-          </Link>
-        </div>
-        <ProductGrid listings={featured} />
-        <div className="mt-6 text-center sm:hidden">
-          <Link href="/shop" className="btn-secondary">View All Products</Link>
         </div>
       </section>
 

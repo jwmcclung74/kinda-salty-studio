@@ -31,6 +31,8 @@ export function AdminPanel({ token }: AdminPanelProps) {
     { slug: 'laser-engraving', label: 'Laser Engraving' },
   ];
 
+  const FEATURED_SLUG = 'featured';
+
   const loadData = useCallback(async (adminToken: string) => {
     setLoading(true);
     setMessage(null);
@@ -92,8 +94,8 @@ export function AdminPanel({ token }: AdminPanelProps) {
         throw new Error(err.error || 'Save failed');
       }
 
-      const label = categories.find((c) => c.slug === category)?.label || category;
-      setMessage({ text: `${label} listings saved!`, type: 'success' });
+      const label = category === FEATURED_SLUG ? 'Featured Products' : categories.find((c) => c.slug === category)?.label || category;
+      setMessage({ text: `${label} saved!`, type: 'success' });
     } catch (err) {
       setMessage({ text: err instanceof Error ? err.message : 'Save failed', type: 'error' });
     } finally {
@@ -124,6 +126,75 @@ export function AdminPanel({ token }: AdminPanelProps) {
       <p className="text-sm text-salt-500">
         Select which Etsy listings appear on each category page. Click a listing to toggle it, then save.
       </p>
+
+      {/* ── Featured Products Section ── */}
+      <section>
+        <div className="flex items-center justify-between mb-2">
+          <div>
+            <h2 className="text-xl font-display">Featured Products</h2>
+            <p className="text-sm text-salt-500">
+              These products appear in the hero carousel on the homepage.
+              {(curated[FEATURED_SLUG] || []).length > 0
+                ? ` ${(curated[FEATURED_SLUG] || []).length} selected`
+                : ' None selected yet.'}
+            </p>
+          </div>
+          <button
+            onClick={() => saveCategory(FEATURED_SLUG)}
+            disabled={saving === FEATURED_SLUG}
+            className="btn-primary text-sm"
+          >
+            {saving === FEATURED_SLUG ? 'Saving...' : 'Save Featured'}
+          </button>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          {listings.map((listing) => {
+            const selected = isSelected(FEATURED_SLUG, listing.id);
+            return (
+              <button
+                key={listing.id}
+                onClick={() => toggleListing(FEATURED_SLUG, listing.id)}
+                className={`text-left rounded border-2 p-2 transition-all ${
+                  selected
+                    ? 'border-accent bg-accent/5 ring-1 ring-accent'
+                    : 'border-salt-200 hover:border-salt-400'
+                }`}
+              >
+                <div className="relative aspect-square overflow-hidden bg-salt-100 rounded mb-2">
+                  <Image
+                    src={listing.images[0]?.url || '/images/placeholder-product.svg'}
+                    alt={listing.images[0]?.alt || listing.title}
+                    fill
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw"
+                    className="object-cover"
+                  />
+                  {selected && (
+                    <div className="absolute top-2 right-2 w-6 h-6 bg-accent rounded-full flex items-center justify-center">
+                      <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                  )}
+                  {!listing.isAvailable && (
+                    <div className="absolute bottom-2 left-2">
+                      <span className="bg-salt-900/80 text-white text-[10px] font-semibold uppercase px-1.5 py-0.5 rounded">
+                        Sold Out
+                      </span>
+                    </div>
+                  )}
+                </div>
+                <p className="text-xs font-medium text-salt-900 line-clamp-2">{listing.title}</p>
+                <p className="text-xs text-salt-500 mt-0.5">
+                  {formatPrice(listing.price, listing.currency)}
+                </p>
+              </button>
+            );
+          })}
+        </div>
+      </section>
+
+      <hr className="border-salt-200" />
 
       {categories.map((cat) => {
         const selectedIds = curated[cat.slug] || [];
