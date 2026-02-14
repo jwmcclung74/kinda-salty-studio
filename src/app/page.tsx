@@ -1,14 +1,11 @@
 import Link from 'next/link';
-import { getListingsByCategory, getFeaturedListings } from '@/lib/listings';
-import { ProductGrid } from '@/components/ProductGrid';
+import { getFeaturedListings } from '@/lib/listings';
 import { EmailSignup } from '@/components/EmailSignup';
 import { FeaturedCarousel } from '@/components/FeaturedCarousel';
 
 export const revalidate = 21600; // 6 hours
 
 export default async function HomePage() {
-  const prints = await getListingsByCategory('3d-prints');
-  const laser = await getListingsByCategory('laser-engraving');
   const featuredListings = await getFeaturedListings();
 
   const featuredProducts = featuredListings.map((l) => ({
@@ -112,37 +109,6 @@ export default async function HomePage() {
           </Link>
         </div>
       </section>
-
-      {/* ── Quick Category Previews ── */}
-      {prints.length > 0 && (
-        <section className="container-site pb-20">
-          <div className="flex items-end justify-between mb-8">
-            <div>
-              <h2 className="section-heading">3D Prints</h2>
-              <p className="section-subheading">Designed and printed in-house</p>
-            </div>
-            <Link href="/3d-prints" className="text-sm font-semibold text-salt-500 hover:text-accent transition-colors hidden sm:inline-flex items-center gap-1">
-              See All →
-            </Link>
-          </div>
-          <ProductGrid listings={prints.slice(0, 4)} />
-        </section>
-      )}
-
-      {laser.length > 0 && (
-        <section className="container-site pb-20">
-          <div className="flex items-end justify-between mb-8">
-            <div>
-              <h2 className="section-heading">Laser Engraved</h2>
-              <p className="section-subheading">Precision cut, beautifully finished</p>
-            </div>
-            <Link href="/laser-engraving" className="text-sm font-semibold text-salt-500 hover:text-accent transition-colors hidden sm:inline-flex items-center gap-1">
-              See All →
-            </Link>
-          </div>
-          <ProductGrid listings={laser.slice(0, 4)} />
-        </section>
-      )}
 
       {/* ── About Teaser ── */}
       <section className="bg-salt-700 text-white">
