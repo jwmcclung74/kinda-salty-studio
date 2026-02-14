@@ -15,13 +15,10 @@ export default function AboutPage() {
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent mb-2">About</p>
         <h1 className="section-heading">The Story Behind the Salt</h1>
         <div className="mt-8 space-y-6 text-salt-700 leading-relaxed">
-          <p>Kinda Salty Studio started with a 3D printer, a laser cutter, and a refusal to settle for boring. What began as a hobby quickly turned into a passion for creating things that are functional, beautiful, and a little bit unexpected.</p>
-          <p>Every product in our shop is designed, printed or engraved, and finished by hand. We work with PLA, resin, wood, and acrylic — choosing the right material for each design to ensure quality and durability.</p>
-          <p>Whether it&apos;s a detailed miniature for your tabletop game, a personalized sign for your home, or a custom gift that says &ldquo;I actually put thought into this,&rdquo; we make things that people are proud to own and give.</p>
-          <h2 className="text-2xl font-display text-salt-900 pt-4">What We Do</h2>
-          <p><strong className="text-salt-900">3D Printing:</strong> We use FDM and resin printers to create everything from articulated toys to functional home goods.</p>
-          <p><strong className="text-salt-900">Laser Engraving &amp; Cutting:</strong> Precision laser work on wood, acrylic, and other materials.</p>
-          <p><strong className="text-salt-900">Custom Orders:</strong> Have something specific in mind? <Link href="/custom-orders" className="text-accent hover:underline">Tell us what you&apos;re thinking</Link> and we&apos;ll figure it out together.</p>
+          <p>Kinda Salty Studio is a husband and wife maker duo who love turning ideas into real, usable things.</p>
+          <p>We design and build practical products using 3D modeling and printing which means we&apos;re not limited by what&apos;s sitting on a store shelf. If it can be designed, it can be made. From clever problem solvers to accessories that fit your life (or your vehicle) perfectly, creativity is the only real constraint.</p>
+          <p>On the jewelry side, we can absolutely do classic and simple. But we also like to have a little fun with it. If you want something with personality, something a little less &ldquo;ordinary&rdquo; and a little more salty, that&apos;s where we really shine.</p>
+          <p>Have an idea? Send it. We love collaborating and creating custom pieces that are personal, meaningful, and made just for you.</p>
         </div>
         <div className="mt-12 flex flex-wrap gap-4">
           <Link href="/shop" className="btn-primary">Browse the Shop</Link>
