@@ -196,6 +196,43 @@ export function clearListingsCache(): void {
   cacheTimestamp = 0;
 }
 
+export async function getCuratedListingsByCategory(category: string): Promise<NormalizedListing[]> {
+  const listings = await getListings();
+
+  if (!process.env.POSTGRES_URL) {
+    // Fall back to tag-based matching if no database
+    return listings.filter((l) => l.category === category);
+  }
+
+  try {
+    const { sql } = await import('@vercel/postgres');
+    await sql`CREATE TABLE IF NOT EXISTS curated_listings (
+      id SERIAL PRIMARY KEY,
+      listing_id VARCHAR(50) NOT NULL,
+      category VARCHAR(50) NOT NULL,
+      sort_order INTEGER DEFAULT 0,
+      created_at TIMESTAMP DEFAULT NOW(),
+      UNIQUE(listing_id, category)
+    )`;
+
+    const result = await sql`SELECT listing_id FROM curated_listings WHERE category = ${category} ORDER BY sort_order`;
+    const curatedIds = result.rows.map((r) => r.listing_id);
+
+    if (curatedIds.length === 0) {
+      // No curated listings yet — return empty so admin knows to configure
+      return [];
+    }
+
+    // Return listings in the curated sort order
+    return curatedIds
+      .map((id) => listings.find((l) => l.id === id))
+      .filter((l): l is NormalizedListing => l != null);
+  } catch (err) {
+    console.error('Curated listings query failed, falling back to tag matching:', err);
+    return listings.filter((l) => l.category === category);
+  }
+}
+
 export async function getRelatedListings(listing: NormalizedListing, limit: number = 4): Promise<NormalizedListing[]> {
   const all = await getListings();
   const scored = all

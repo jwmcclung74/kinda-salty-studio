@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { getListingsByCategory } from '@/lib/listings';
+import { getCuratedListingsByCategory } from '@/lib/listings';
 import { siteConfig } from '@/lib/site.config';
 import { ProductGrid } from '@/components/ProductGrid';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 };
 
 export default async function LaserEngravingPage() {
-  const listings = await getListingsByCategory('laser-engraving');
+  const listings = await getCuratedListingsByCategory('laser-engraving');
   return (
     <div className="container-site py-10">
       <Breadcrumbs items={[{ label: cat.label }]} />
