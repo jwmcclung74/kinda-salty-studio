@@ -76,7 +76,7 @@ export default async function HomePage() {
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent mb-2">Explore</p>
               <h2 className="text-2xl sm:text-3xl font-display">3D Prints</h2>
               <p className="mt-2 text-salt-600 max-w-sm">
-                Figurines, planters, desk toys, and functional prints — all designed and printed in-house.
+                From custom phone chargers and modern planters to LED lighting and other functional designs, everything we make is designed and produced in-house. No mass production. No generic imports. Just thoughtfully built pieces made to work and last.
               </p>
               <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-salt-700 group-hover:text-accent transition-colors">
                 View Collection →
@@ -94,7 +94,7 @@ export default async function HomePage() {
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent mb-2">Explore</p>
               <h2 className="text-2xl sm:text-3xl font-display">Laser Engraving</h2>
               <p className="mt-2 text-salt-300 max-w-sm">
-                Signs, coasters, ornaments, and personalized gifts — precision cut and engraved.
+                We specialize in necklace pendants, pet tags, and custom engraving of all kinds. Brass, copper, aluminum and even the occasional nickel plated brass are our favorite materials to work with. They age beautifully, engrave cleanly, and give each piece a solid, timeless feel.
               </p>
               <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-white group-hover:text-accent transition-colors">
                 View Collection →
