@@ -241,10 +241,11 @@ export async function getCuratedListingsByCategory(category: string): Promise<No
       return listings.filter((l) => l.category === category);
     }
 
-    // Return listings in the curated sort order
+    // Return listings in the curated sort order, with category matching this page
     return curatedIds
       .map((id) => listings.find((l) => l.id === id))
-      .filter((l): l is NormalizedListing => l != null);
+      .filter((l): l is NormalizedListing => l != null)
+      .map((l) => ({ ...l, category }));
   } catch (err) {
     console.error('Curated listings query failed, falling back to tag matching:', err);
     return listings.filter((l) => l.category === category);
