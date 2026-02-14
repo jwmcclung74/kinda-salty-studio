@@ -91,7 +91,7 @@ async function fetchFromEtsyApi(): Promise<NormalizedListing[]> {
   const headers = { 'x-api-key': apiKey };
 
   // Fetch active listings
-  const listingsRes = await fetch(`${baseUrl}/listings/active?limit=100&includes=images`, {
+  const listingsRes = await fetch(`${baseUrl}/listings/active?limit=100`, {
     headers,
     next: { revalidate: siteConfig.revalidate },
   });
@@ -112,9 +112,27 @@ async function fetchFromEtsyApi(): Promise<NormalizedListing[]> {
     // Non-critical
   }
 
-  return (listingsJson.results || []).map((raw: EtsyApiListing) =>
-    normalizeEtsyListing(raw, raw.shop_section_id ? sectionsMap[raw.shop_section_id] : undefined)
+  // Fetch images for each listing in parallel
+  const rawListings: EtsyApiListing[] = listingsJson.results || [];
+  const imageResults = await Promise.allSettled(
+    rawListings.map((raw) =>
+      fetch(`https://openapi.etsy.com/v3/application/listings/${raw.listing_id}/images`, { headers })
+        .then((res) => (res.ok ? res.json() : { results: [] }))
+        .then((json) => ({ listingId: raw.listing_id, images: json.results || [] }))
+    )
   );
+
+  const imageMap: Record<number, EtsyApiImage[]> = {};
+  for (const result of imageResults) {
+    if (result.status === 'fulfilled') {
+      imageMap[result.value.listingId] = result.value.images;
+    }
+  }
+
+  return rawListings.map((raw) => {
+    const rawWithImages = { ...raw, images: imageMap[raw.listing_id] || raw.images };
+    return normalizeEtsyListing(rawWithImages, raw.shop_section_id ? sectionsMap[raw.shop_section_id] : undefined);
+  });
 }
 
 // ── Fallback file-based source ────────────────────────────────
@@ -219,8 +237,8 @@ export async function getCuratedListingsByCategory(category: string): Promise<No
     const curatedIds = result.rows.map((r) => r.listing_id);
 
     if (curatedIds.length === 0) {
-      // No curated listings yet — return empty so admin knows to configure
-      return [];
+      // No curated listings configured yet — fall back to tag-based matching
+      return listings.filter((l) => l.category === category);
     }
 
     // Return listings in the curated sort order

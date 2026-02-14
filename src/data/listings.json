@@ -1,162 +1,489 @@
 {
   "listings": [
     {
-      "id": "sample-001",
-      "slug": "custom-3d-printed-dragon-miniature",
-      "title": "Custom 3D Printed Dragon Miniature",
-      "description": "Beautifully detailed dragon miniature, 3D printed in high-quality PLA. Perfect for tabletop gaming, display shelves, or as a unique gift. Available in multiple colors. Each piece is carefully printed and cleaned for the best finish.",
-      "price": 24.99,
+      "id": "1291963637",
+      "slug": "xtool-d1-rotary-jig-v2-stl-file-for-3d-printing-your-own-1291963637",
+      "title": "Xtool D1 Rotary Jig v2 - STL File for 3D Printing Your Own",
+      "description": "This is an STL file you can use to print your own Xtool D1 Rotary Jig v2 if you don&#39;t want to buy the already printed one located here, \n\nhttps://www.etsy.com/listing/1228380064/xtool-d1-ra2-pro-rotary-tool-leveling?click_key=20cfd953c348e3953a149d81d843f5378c6c8a79%3A1228380064&click_sum=836a248c&ga_order=most_relevant&ga_search_type=all&ga_view_type=gallery&ga_search_query=xtool+rotary+jig&ref=search_grid-537162-1-1.\n\nUpdate: The file you will receive is the next generation which is simpler to print and assemble.\n\nThe parts you will need are\n- Two (1) M6 10mm nut\n- One (1) M6 bolt. The longer the bolt, the more angle you will get on your rotary., you can get\n- One (1) flat 22mm x 15mm x 2mm flat magnets from Hobby Lobby. (If you want to take advantage of the magnet base)\n\nTo assemble all you need to do is carefully super glue the nut and bolt in their respective spots and snap the ball cover to the base.\n\nIt is for your use only, please do not sell the file or printed product to others.",
+      "price": 5,
       "currency": "USD",
       "images": [
         {
-          "url": "/images/placeholder-product.svg",
-          "alt": "Custom 3D Printed Dragon Miniature",
-          "width": 800,
-          "height": 800,
-          "rank": 0
+          "url": "https://i.etsystatic.com/32754949/r/il/564be4/4648427376/il_570xN.4648427376_62h4.jpg",
+          "alt": "Xtool D1 Rotary Jig v2 - STL File for 3D Printing Your Own",
+          "width": 3000,
+          "height": 1688,
+          "rank": 1
+        },
+        {
+          "url": "https://i.etsystatic.com/32754949/r/il/b78fbb/4648427024/il_570xN.4648427024_ghoy.jpg",
+          "alt": "Xtool D1 Rotary Jig v2 - STL File for 3D Printing Your Own",
+          "width": 3000,
+          "height": 1688,
+          "rank": 2
         }
       ],
-      "tags": ["3d print", "dragon", "miniature", "tabletop", "gaming", "pla", "figurine"],
-      "materials": ["PLA", "Biodegradable Plastic"],
+      "tags": [
+        "3d printing",
+        "xtool",
+        "D1",
+        "Rotary",
+        "Jig"
+      ],
+      "materials": [
+        "PETG",
+        "PLA"
+      ],
       "category": "3d-prints",
-      "createdAt": "2025-01-15T00:00:00Z",
-      "updatedAt": "2025-01-15T00:00:00Z",
-      "listingUrl": "https://www.etsy.com/shop/KindaSaltyStudio",
-      "quantity": 10,
-      "isAvailable": true,
-      "shopSection": "3D Prints"
+      "createdAt": "2026-02-10T16:16:16.000Z",
+      "updatedAt": "2026-02-10T16:16:16.000Z",
+      "listingUrl": "https://www.etsy.com/listing/1291963637/xtool-d1-rotary-jig-v2-stl-file-for-3d",
+      "quantity": 63,
+      "isAvailable": true
     },
     {
-      "id": "sample-002",
-      "slug": "laser-engraved-wooden-coaster-set",
-      "title": "Laser Engraved Wooden Coaster Set",
-      "description": "Set of 4 beautifully laser engraved wooden coasters. Each coaster features intricate geometric patterns cut with precision. Made from sustainably sourced birch plywood with a natural finish. Perfect housewarming gift.",
-      "price": 32.00,
+      "id": "1248478989",
+      "slug": "3d-printed-pickleball-earring-studs-1248478989",
+      "title": "3D Printed Pickleball Earring Studs",
+      "description": "3D printed Pickleball themed stud earrings. If you want to be the envy of your rec league or tournament, you need a pair of these. I designed and will custom 3D print your set, just for you.  The stud portion is made of stainless steel.",
+      "price": 10,
       "currency": "USD",
       "images": [
         {
-          "url": "/images/placeholder-product.svg",
-          "alt": "Laser Engraved Wooden Coaster Set",
-          "width": 800,
-          "height": 800,
-          "rank": 0
-        }
-      ],
-      "tags": ["laser engraved", "coasters", "wood", "geometric", "home decor", "gift"],
-      "materials": ["Birch Plywood", "Wood"],
-      "category": "laser-engraving",
-      "createdAt": "2025-02-01T00:00:00Z",
-      "updatedAt": "2025-02-01T00:00:00Z",
-      "listingUrl": "https://www.etsy.com/shop/KindaSaltyStudio",
-      "quantity": 15,
-      "isAvailable": true,
-      "shopSection": "Laser Engraving"
-    },
-    {
-      "id": "sample-003",
-      "slug": "personalized-laser-cut-name-sign",
-      "title": "Personalized Laser Cut Name Sign",
-      "description": "Custom laser cut name sign made from premium birch wood. Perfect for nurseries, bedrooms, or as a personalized gift. Available in multiple fonts and sizes. Each sign is carefully cut and sanded for a smooth finish.",
-      "price": 45.00,
-      "currency": "USD",
-      "images": [
+          "url": "https://i.etsystatic.com/32754949/r/il/701d38/3979790353/il_570xN.3979790353_fgt7.jpg",
+          "alt": "3D Printed Pickleball Earring Studs",
+          "width": 1746,
+          "height": 1571,
+          "rank": 1
+        },
         {
-          "url": "/images/placeholder-product.svg",
-          "alt": "Personalized Laser Cut Name Sign",
-          "width": 800,
-          "height": 800,
-          "rank": 0
-        }
-      ],
-      "tags": ["laser cut", "name sign", "personalized", "wood", "nursery", "custom"],
-      "materials": ["Birch Wood"],
-      "category": "laser-engraving",
-      "createdAt": "2025-02-10T00:00:00Z",
-      "updatedAt": "2025-02-10T00:00:00Z",
-      "listingUrl": "https://www.etsy.com/shop/KindaSaltyStudio",
-      "quantity": 20,
-      "isAvailable": true,
-      "shopSection": "Laser Engraving"
-    },
-    {
-      "id": "sample-004",
-      "slug": "3d-printed-articulated-octopus",
-      "title": "3D Printed Articulated Octopus",
-      "description": "Fun and fidget-friendly articulated octopus, fully 3D printed in one piece — no assembly required! Tentacles move and flex. Great desk toy, stress reliever, or quirky gift. Available in a rainbow of colors.",
-      "price": 18.50,
-      "currency": "USD",
-      "images": [
+          "url": "https://i.etsystatic.com/32754949/r/il/b7e19b/3932334776/il_570xN.3932334776_q79v.jpg",
+          "alt": "3D Printed Pickleball Earring Studs",
+          "width": 3000,
+          "height": 1688,
+          "rank": 2
+        },
         {
-          "url": "/images/placeholder-product.svg",
-          "alt": "3D Printed Articulated Octopus",
-          "width": 800,
-          "height": 800,
-          "rank": 0
+          "url": "https://i.etsystatic.com/32754949/r/il/5de798/3979790783/il_570xN.3979790783_bhut.jpg",
+          "alt": "3D Printed Pickleball Earring Studs",
+          "width": 2250,
+          "height": 3000,
+          "rank": 3
         }
       ],
-      "tags": ["3d print", "articulated", "octopus", "fidget", "toy", "desk toy", "pla"],
-      "materials": ["PLA"],
+      "tags": [
+        "pickleball",
+        "earring",
+        "3d print"
+      ],
+      "materials": [
+        "plastic",
+        "stainless steel"
+      ],
       "category": "3d-prints",
-      "createdAt": "2025-01-20T00:00:00Z",
-      "updatedAt": "2025-01-20T00:00:00Z",
-      "listingUrl": "https://www.etsy.com/shop/KindaSaltyStudio",
-      "quantity": 25,
-      "isAvailable": true,
-      "shopSection": "3D Prints"
+      "createdAt": "2026-02-06T01:10:26.000Z",
+      "updatedAt": "2026-02-06T01:10:26.000Z",
+      "listingUrl": "https://www.etsy.com/listing/1248478989/3d-printed-pickleball-earring-studs",
+      "quantity": 96,
+      "isAvailable": true
     },
     {
-      "id": "sample-005",
-      "slug": "laser-engraved-pet-memorial-ornament",
-      "title": "Laser Engraved Pet Memorial Ornament",
-      "description": "A touching laser engraved pet memorial ornament. Personalized with your pet's name and dates. Made from quality birch wood with a ribbon hanger included. A beautiful way to remember a beloved companion.",
-      "price": 22.00,
+      "id": "1780180225",
+      "slug": "festive-brass-earrings-1780180225",
+      "title": "Festive Brass Earrings",
+      "description": "If you are looking for some festive brass stud earrings, you found the right place. When you order, let me know if you are wanting the Jack O&#39; Lantern, Bat, Pickleball or Hamsa variety.",
+      "price": 20,
       "currency": "USD",
       "images": [
         {
-          "url": "/images/placeholder-product.svg",
-          "alt": "Laser Engraved Pet Memorial Ornament",
-          "width": 800,
-          "height": 800,
-          "rank": 0
+          "url": "https://i.etsystatic.com/32754949/r/il/17eada/6253405311/il_570xN.6253405311_fg53.jpg",
+          "alt": "Festive Brass Earrings",
+          "width": 1688,
+          "height": 3000,
+          "rank": 1
+        },
+        {
+          "url": "https://i.etsystatic.com/32754949/r/il/4a0f2b/6253404755/il_570xN.6253404755_ghcw.jpg",
+          "alt": "Festive Brass Earrings",
+          "width": 1688,
+          "height": 3000,
+          "rank": 2
+        },
+        {
+          "url": "https://i.etsystatic.com/32754949/r/il/21b71e/6205374362/il_570xN.6205374362_62a8.jpg",
+          "alt": "Festive Brass Earrings",
+          "width": 1688,
+          "height": 3000,
+          "rank": 3
+        },
+        {
+          "url": "https://i.etsystatic.com/32754949/r/il/b57382/6253404753/il_570xN.6253404753_kai7.jpg",
+          "alt": "Festive Brass Earrings",
+          "width": 1688,
+          "height": 3000,
+          "rank": 4
         }
       ],
-      "tags": ["laser engraved", "pet memorial", "ornament", "personalized", "wood", "memorial"],
-      "materials": ["Birch Wood"],
+      "tags": [
+        "brass",
+        "halloween",
+        "jack o lantern",
+        "hamsa",
+        "bat",
+        "pickleball",
+        "earring",
+        "laser",
+        "engraving",
+        "xtool"
+      ],
+      "materials": [
+        "brass",
+        "laser engraver"
+      ],
       "category": "laser-engraving",
-      "createdAt": "2025-03-01T00:00:00Z",
-      "updatedAt": "2025-03-01T00:00:00Z",
-      "listingUrl": "https://www.etsy.com/shop/KindaSaltyStudio",
-      "quantity": 30,
-      "isAvailable": true,
-      "shopSection": "Laser Engraving"
+      "createdAt": "2025-12-22T14:30:35.000Z",
+      "updatedAt": "2025-12-22T14:30:35.000Z",
+      "listingUrl": "https://www.etsy.com/listing/1780180225/festive-brass-earrings",
+      "quantity": 99,
+      "isAvailable": true
     },
     {
-      "id": "sample-006",
-      "slug": "3d-printed-geometric-planter",
-      "title": "3D Printed Geometric Planter",
-      "description": "Modern geometric planter, 3D printed with a matte finish. Features a drainage hole and built-in saucer. Perfect for succulents and small plants. Unique honeycomb pattern adds a contemporary touch to any space.",
-      "price": 19.99,
+      "id": "1390020871",
+      "slug": "leather-coaster-debossing-jig-stl-file-for-3d-printing-your-own-1390020871",
+      "title": "Leather Coaster Debossing Jig - STL File for 3D Printing Your Own",
+      "description": "This is an STL file you can use to print your own jig to accurately deboss a 3.75&quot; leather coaster using a stamp. It is for your use only, please do not sell the file or printed product to others. To see how to use this jig, you can watch my YouTube video, https://youtu.be/Rng3iX4AIvk.",
+      "price": 5,
       "currency": "USD",
       "images": [
         {
-          "url": "/images/placeholder-product.svg",
-          "alt": "3D Printed Geometric Planter",
-          "width": 800,
-          "height": 800,
-          "rank": 0
+          "url": "https://i.etsystatic.com/32754949/r/il/db1a8a/4506572852/il_570xN.4506572852_dp7f.jpg",
+          "alt": "Leather Coaster Debossing Jig - STL File for 3D Printing Your Own",
+          "width": 3000,
+          "height": 1688,
+          "rank": 1
+        },
+        {
+          "url": "https://i.etsystatic.com/32754949/r/il/5d9f57/4506573526/il_570xN.4506573526_i9mj.jpg",
+          "alt": "Leather Coaster Debossing Jig - STL File for 3D Printing Your Own",
+          "width": 3000,
+          "height": 1688,
+          "rank": 2
+        },
+        {
+          "url": "https://i.etsystatic.com/32754949/r/il/2c63e5/4553939233/il_570xN.4553939233_e53s.jpg",
+          "alt": "Leather Coaster Debossing Jig - STL File for 3D Printing Your Own",
+          "width": 3000,
+          "height": 1688,
+          "rank": 3
         }
       ],
-      "tags": ["3d print", "planter", "geometric", "succulent", "home decor", "modern", "pla"],
-      "materials": ["PLA", "Biodegradable Plastic"],
+      "tags": [
+        "3d printing",
+        "Jig",
+        "deboss",
+        "stamp",
+        "emboss"
+      ],
+      "materials": [
+        "PETG",
+        "PLA"
+      ],
       "category": "3d-prints",
-      "createdAt": "2025-02-15T00:00:00Z",
-      "updatedAt": "2025-02-15T00:00:00Z",
-      "listingUrl": "https://www.etsy.com/shop/KindaSaltyStudio",
-      "quantity": 12,
-      "isAvailable": true,
-      "shopSection": "3D Prints"
+      "createdAt": "2025-12-17T16:51:42.000Z",
+      "updatedAt": "2025-12-17T16:51:42.000Z",
+      "listingUrl": "https://www.etsy.com/listing/1390020871/leather-coaster-debossing-jig-stl-file",
+      "quantity": 91,
+      "isAvailable": true
+    },
+    {
+      "id": "1778417189",
+      "slug": "dallas-cowboys-5-time-super-bowl-coin-design-1778417189",
+      "title": "Dallas Cowboys 5 Time Super Bowl Coin Design",
+      "description": "Dallas Cowboys coin design for deep engraving. You will receive an Xtool Creative Space file and the .png files if you use a different tool. Please don&#39;t resell this design.",
+      "price": 5,
+      "currency": "USD",
+      "images": [
+        {
+          "url": "https://i.etsystatic.com/32754949/r/il/aeb51f/6245573941/il_570xN.6245573941_a401.jpg",
+          "alt": "Dallas Cowboys 5 Time Super Bowl Coin Design",
+          "width": 1513,
+          "height": 2688,
+          "rank": 1
+        },
+        {
+          "url": "https://i.etsystatic.com/32754949/r/il/a1fc29/6245574007/il_570xN.6245574007_hpnx.jpg",
+          "alt": "Dallas Cowboys 5 Time Super Bowl Coin Design",
+          "width": 1474,
+          "height": 2619,
+          "rank": 2
+        },
+        {
+          "url": "https://i.etsystatic.com/32754949/r/il/751dac/6245574835/il_570xN.6245574835_bpx6.jpg",
+          "alt": "Dallas Cowboys 5 Time Super Bowl Coin Design",
+          "width": 414,
+          "height": 414,
+          "rank": 3
+        },
+        {
+          "url": "https://i.etsystatic.com/32754949/r/il/dec276/6245574865/il_570xN.6245574865_g5s4.jpg",
+          "alt": "Dallas Cowboys 5 Time Super Bowl Coin Design",
+          "width": 414,
+          "height": 414,
+          "rank": 4
+        }
+      ],
+      "tags": [
+        "laser",
+        "engraving",
+        "dallas cowboys",
+        "brass",
+        "coin",
+        "design",
+        "depth",
+        "map",
+        "xtool",
+        "F1 Ultra"
+      ],
+      "materials": [],
+      "category": "laser-engraving",
+      "createdAt": "2025-12-13T05:10:40.000Z",
+      "updatedAt": "2025-12-13T05:10:40.000Z",
+      "listingUrl": "https://www.etsy.com/listing/1778417189/dallas-cowboys-5-time-super-bowl-coin",
+      "quantity": 995,
+      "isAvailable": true
+    },
+    {
+      "id": "1867825063",
+      "slug": "wyze-camera-mount-v2-for-inside-of-xtool-f1-ultra-laser-engraver-1867825063",
+      "title": "Wyze Camera mount v2 for inside of Xtool F1 Ultra Laser Engraver",
+      "description": "With the safety shield on the Xtool F1 Ultra, it is not ideal to use a camera from outside. So, I made a 3D printed mount for an inexpensive Wyze web cam. This allows you to see the status of your engraving from anywhere while keeping your eyes safe. This comes with everything you will need except for the Wyze camera. This works with the v3 & v4 versions of the Wyze Cam.",
+      "price": 15,
+      "currency": "USD",
+      "images": [
+        {
+          "url": "https://i.etsystatic.com/32754949/r/il/8a6177/6660608087/il_570xN.6660608087_9zde.jpg",
+          "alt": "Wyze Camera mount v2 for inside of Xtool F1 Ultra Laser Engraver",
+          "width": 1452,
+          "height": 1861,
+          "rank": 1
+        },
+        {
+          "url": "https://i.etsystatic.com/32754949/r/il/2bb79c/6660608173/il_570xN.6660608173_53uj.jpg",
+          "alt": "Wyze Camera mount v2 for inside of Xtool F1 Ultra Laser Engraver",
+          "width": 1566,
+          "height": 2109,
+          "rank": 2
+        }
+      ],
+      "tags": [
+        "xtool",
+        "wyze",
+        "laser",
+        "f1 ultra",
+        "camera",
+        "mount",
+        "bambu",
+        "petg"
+      ],
+      "materials": [
+        "PETG"
+      ],
+      "category": "laser-engraving",
+      "createdAt": "2025-11-16T13:50:16.000Z",
+      "updatedAt": "2025-11-16T13:50:16.000Z",
+      "listingUrl": "https://www.etsy.com/listing/1867825063/wyze-camera-mount-v2-for-inside-of-xtool",
+      "quantity": 96,
+      "isAvailable": true
+    },
+    {
+      "id": "1228380064",
+      "slug": "xtool-d1-ra2-pro-rotary-tool-leveling-jig-v2-1228380064",
+      "title": "Xtool D1 RA2 Pro Rotary Tool Leveling Jig v2",
+      "description": "This is a 3D printed leveling jig for the Xtool D1 RA2 Pro rotary tool. It will be shipped as a completed tool ready to go. If you want to see a demo, you can check it out here, https://youtu.be/KqgynXmatrY.",
+      "price": 50,
+      "currency": "USD",
+      "images": [
+        {
+          "url": "https://i.etsystatic.com/32754949/r/il/ad6ec2/4696675653/il_570xN.4696675653_50ux.jpg",
+          "alt": "Xtool D1 RA2 Pro Rotary Tool Leveling Jig v2",
+          "width": 3000,
+          "height": 1688,
+          "rank": 1
+        },
+        {
+          "url": "https://i.etsystatic.com/32754949/r/il/816dcf/4696675327/il_570xN.4696675327_tmyh.jpg",
+          "alt": "Xtool D1 RA2 Pro Rotary Tool Leveling Jig v2",
+          "width": 3000,
+          "height": 1688,
+          "rank": 2
+        }
+      ],
+      "tags": [
+        "xtool",
+        "d1",
+        "rotary",
+        "laser engrave",
+        "3d print",
+        "jig",
+        "tumbler",
+        "petg",
+        "tool",
+        "yeti"
+      ],
+      "materials": [
+        "PETG"
+      ],
+      "category": "3d-prints",
+      "createdAt": "2025-11-11T02:31:23.000Z",
+      "updatedAt": "2025-11-11T02:31:23.000Z",
+      "listingUrl": "https://www.etsy.com/listing/1228380064/xtool-d1-ra2-pro-rotary-tool-leveling",
+      "quantity": 39,
+      "isAvailable": true
+    },
+    {
+      "id": "1427417835",
+      "slug": "lizzq-pellet-smoker-tube-filling-funnel-1427417835",
+      "title": "LizzQ Pellet Smoker Tube Filling Funnel",
+      "description": "This is a 3D printed funnel system for the LizzQ pellet smoker tube. It has a base with a magnet that will hold it steady while you fill the top piece (funnel) with your choice of pellets. When not in use the two pieces lock together for convenient storage.\n\nTo see it in action you can check out my video on YouTube, https://youtu.be/Efu1WasbIc4.",
+      "price": 50,
+      "currency": "USD",
+      "images": [
+        {
+          "url": "https://i.etsystatic.com/32754949/r/il/daba7b/4672490004/il_570xN.4672490004_nkfv.jpg",
+          "alt": "LizzQ Pellet Smoker Tube Filling Funnel",
+          "width": 3000,
+          "height": 1688,
+          "rank": 1
+        },
+        {
+          "url": "https://i.etsystatic.com/32754949/r/il/94a7f6/4720721827/il_570xN.4720721827_iaea.jpg",
+          "alt": "LizzQ Pellet Smoker Tube Filling Funnel",
+          "width": 3000,
+          "height": 1688,
+          "rank": 2
+        },
+        {
+          "url": "https://i.etsystatic.com/32754949/r/il/9632c3/4672488338/il_570xN.4672488338_oyr8.jpg",
+          "alt": "LizzQ Pellet Smoker Tube Filling Funnel",
+          "width": 3000,
+          "height": 1688,
+          "rank": 3
+        }
+      ],
+      "tags": [
+        "smoker",
+        "pellet",
+        "tube",
+        "3d printed",
+        "funnel",
+        "BBQ",
+        "Barbecue"
+      ],
+      "materials": [
+        "PETG",
+        "Magnet"
+      ],
+      "category": "3d-prints",
+      "createdAt": "2025-11-07T01:31:09.000Z",
+      "updatedAt": "2025-11-07T01:31:09.000Z",
+      "listingUrl": "https://www.etsy.com/listing/1427417835/lizzq-pellet-smoker-tube-filling-funnel",
+      "quantity": 1,
+      "isAvailable": true
+    },
+    {
+      "id": "1376008504",
+      "slug": "leather-coaster-laser-engraving-jig-stl-file-for-3d-printing-your-own-1376008504",
+      "title": "Leather Coaster Laser Engraving Jig - STL File for 3D Printing Your Own",
+      "description": "This is an STL file you can use to print your own jig to accurately laser engrave a 3.75&quot; leather coaster. It is for your use only, please do not sell the file or printed product to others. To see how to use this jig, you can watch my YouTube video, https://youtu.be/f1RKg3IfgrY.",
+      "price": 5,
+      "currency": "USD",
+      "images": [
+        {
+          "url": "https://i.etsystatic.com/32754949/r/il/b653c4/4553898805/il_570xN.4553898805_ailz.jpg",
+          "alt": "Leather Coaster Laser Engraving Jig - STL File for 3D Printing Your Own",
+          "width": 1562,
+          "height": 1108,
+          "rank": 1
+        }
+      ],
+      "tags": [
+        "3d printing",
+        "xtool",
+        "D1",
+        "Jig"
+      ],
+      "materials": [
+        "PETG",
+        "PLA"
+      ],
+      "category": "3d-prints",
+      "createdAt": "2025-11-06T17:52:32.000Z",
+      "updatedAt": "2025-11-07T10:49:03.000Z",
+      "listingUrl": "https://www.etsy.com/listing/1376008504/leather-coaster-laser-engraving-jig-stl",
+      "quantity": 99,
+      "isAvailable": true
+    },
+    {
+      "id": "1505837997",
+      "slug": "the-bug-blocker-1505837997",
+      "title": "The Bug Blocker",
+      "description": "3D printed toppers for beer bottles to keep bugs out. Simple, easy to use and effective. I have a ton of different designs available. For now I am selling a thumbs up, middle finger, peace sign, stunner, and the traditional bug blocker. Discounts available for bulk orders as well, just contact me.",
+      "price": 10,
+      "currency": "USD",
+      "images": [
+        {
+          "url": "https://i.etsystatic.com/32754949/r/il/be5109/5010465724/il_570xN.5010465724_c6ne.jpg",
+          "alt": "The Bug Blocker",
+          "width": 3000,
+          "height": 1688,
+          "rank": 1
+        },
+        {
+          "url": "https://i.etsystatic.com/32754949/r/il/17100d/5058699915/il_570xN.5058699915_s8gk.jpg",
+          "alt": "The Bug Blocker",
+          "width": 3000,
+          "height": 1688,
+          "rank": 2
+        },
+        {
+          "url": "https://i.etsystatic.com/32754949/r/il/9bbb12/5058700007/il_570xN.5058700007_glvr.jpg",
+          "alt": "The Bug Blocker",
+          "width": 3000,
+          "height": 1688,
+          "rank": 3
+        },
+        {
+          "url": "https://i.etsystatic.com/32754949/r/il/c3ff91/5010465956/il_570xN.5010465956_ohhw.jpg",
+          "alt": "The Bug Blocker",
+          "width": 3000,
+          "height": 1688,
+          "rank": 4
+        },
+        {
+          "url": "https://i.etsystatic.com/32754949/r/il/43ffdd/5058700173/il_570xN.5058700173_ao48.jpg",
+          "alt": "The Bug Blocker",
+          "width": 3000,
+          "height": 1688,
+          "rank": 5
+        }
+      ],
+      "tags": [
+        "3d print",
+        "beer",
+        "bottle",
+        "bug"
+      ],
+      "materials": [
+        "Plastic"
+      ],
+      "category": "3d-prints",
+      "createdAt": "2025-10-24T23:19:51.000Z",
+      "updatedAt": "2025-10-24T23:19:51.000Z",
+      "listingUrl": "https://www.etsy.com/listing/1505837997/the-bug-blocker",
+      "quantity": 98,
+      "isAvailable": true
     }
   ],
-  "fetchedAt": "2025-03-15T00:00:00Z",
+  "fetchedAt": "2026-02-14T11:29:51.681Z",
   "source": "file"
 }
