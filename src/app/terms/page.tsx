@@ -37,7 +37,7 @@ export default function TermsPage() {
           <p>We reserve the right to update these terms at any time. Changes will be posted on this page with an updated date.</p>
 
           <h2 className="text-xl font-display text-salt-900">Contact</h2>
-          <p>Questions about these terms? Email us at {siteConfig.contact.email}.</p>
+          <p>Questions about these terms? Please use our <a href="/contact" className="text-accent hover:underline">contact form</a>.</p>
         </div>
       </div>
     </div>
