@@ -38,10 +38,10 @@ export default function PrivacyPage() {
           <p>Email signup data is retained until you request removal. Contact form submissions are retained for up to 12 months. Analytics data is retained per Google&apos;s default retention settings.</p>
 
           <h2 className="text-xl font-display text-salt-900">Your Rights</h2>
-          <p>You may request access to, correction of, or deletion of your personal data at any time by emailing us at {siteConfig.contact.email}.</p>
+          <p>You may request access to, correction of, or deletion of your personal data at any time by submitting our <a href="/contact" className="text-accent hover:underline">contact form</a>.</p>
 
           <h2 className="text-xl font-display text-salt-900">Contact</h2>
-          <p>If you have any questions about this privacy policy, please contact us at {siteConfig.contact.email}.</p>
+          <p>If you have any questions about this privacy policy, please use our <a href="/contact" className="text-accent hover:underline">contact form</a>.</p>
         </div>
       </div>
     </div>
