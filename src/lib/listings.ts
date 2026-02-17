@@ -56,6 +56,11 @@ interface EtsyApiImage {
   rank: number;
 }
 
+interface GetListingsOptions {
+  forceFresh?: boolean;
+  skipFallback?: boolean;
+}
+
 function normalizeEtsyListing(raw: EtsyApiListing, sectionName?: string): NormalizedListing {
   const images: ListingImage[] = (raw.images || []).map((img) => ({
     url: img.url_570xN || img.url_fullxfull,
@@ -91,14 +96,24 @@ async function fetchFromEtsyApi(): Promise<NormalizedListing[]> {
 
   const baseUrl = `https://openapi.etsy.com/v3/application/shops/${shopId}`;
   const headers = { 'x-api-key': apiKey };
+  const pageSize = 100;
 
-  // Fetch active listings
-  const listingsRes = await fetch(`${baseUrl}/listings/active?limit=100`, {
-    headers,
-    next: { revalidate: siteConfig.revalidate, tags: [ETSY_CACHE_TAG] },
-  });
-  if (!listingsRes.ok) throw new Error(`Etsy API error: ${listingsRes.status}`);
-  const listingsJson = await listingsRes.json();
+  // Fetch all active listings with pagination
+  const rawListings: EtsyApiListing[] = [];
+  let offset = 0;
+  while (true) {
+    const listingsRes = await fetch(`${baseUrl}/listings/active?limit=${pageSize}&offset=${offset}`, {
+      headers,
+      next: { revalidate: siteConfig.revalidate, tags: [ETSY_CACHE_TAG] },
+    });
+    if (!listingsRes.ok) throw new Error(`Etsy API error: ${listingsRes.status}`);
+    const listingsJson = await listingsRes.json();
+    const batch: EtsyApiListing[] = listingsJson.results || [];
+    rawListings.push(...batch);
+
+    if (batch.length < pageSize) break;
+    offset += pageSize;
+  }
 
   // Optionally fetch shop sections for category mapping
   let sectionsMap: Record<number, string> = {};
@@ -118,7 +133,6 @@ async function fetchFromEtsyApi(): Promise<NormalizedListing[]> {
   }
 
   // Fetch images for each listing in parallel
-  const rawListings: EtsyApiListing[] = listingsJson.results || [];
   const imageResults = await Promise.allSettled(
     rawListings.map((raw) =>
       fetch(`https://openapi.etsy.com/v3/application/listings/${raw.listing_id}/images`, {
@@ -159,13 +173,15 @@ function loadFallbackListings(): NormalizedListing[] {
 let cachedListings: NormalizedListing[] | null = null;
 let cacheTimestamp = 0;
 
-export async function getListings(): Promise<NormalizedListing[]> {
+export async function getListings(options: GetListingsOptions = {}): Promise<NormalizedListing[]> {
+  const { forceFresh = false, skipFallback = false } = options;
   // In-memory cache for the duration of a server lifecycle
   const now = Date.now();
-  if (cachedListings && now - cacheTimestamp < siteConfig.revalidate * 1000) {
+  if (!forceFresh && cachedListings && now - cacheTimestamp < siteConfig.revalidate * 1000) {
     return cachedListings;
   }
 
+  let etsyError: unknown = null;
   try {
     if (siteConfig.etsy.apiKey && siteConfig.etsy.shopId) {
       cachedListings = await fetchFromEtsyApi();
@@ -173,7 +189,13 @@ export async function getListings(): Promise<NormalizedListing[]> {
       return cachedListings;
     }
   } catch (err) {
+    etsyError = err;
     console.error('Etsy API fetch failed, falling back to file:', err);
+  }
+
+  if (skipFallback) {
+    if (etsyError instanceof Error) throw etsyError;
+    throw new Error('Etsy API key or shop ID not configured');
   }
 
   cachedListings = loadFallbackListings();

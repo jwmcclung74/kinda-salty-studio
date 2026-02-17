@@ -8,7 +8,7 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const listings = await getListings();
+    const listings = await getListings({ forceFresh: true, skipFallback: true });
     return NextResponse.json({ listings });
   } catch (err) {
     console.error('Admin listings fetch error:', err);
