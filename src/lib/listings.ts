@@ -61,6 +61,11 @@ interface GetListingsOptions {
   skipFallback?: boolean;
 }
 
+function parseShopSlugFromUrl(url: string): string {
+  const match = url.match(/etsy\.com\/shop\/([^/?#]+)/i);
+  return match?.[1] || '';
+}
+
 async function parseEtsyError(res: Response, url: string): Promise<Error> {
   let details = '';
   try {
@@ -105,7 +110,6 @@ async function fetchFromEtsyApi(): Promise<NormalizedListing[]> {
   const { apiKey, sharedSecret, shopId } = siteConfig.etsy;
   if (!apiKey || !shopId) throw new Error('Etsy API key or shop ID not configured');
 
-  const baseUrl = `https://openapi.etsy.com/v3/application/shops/${shopId}`;
   const xApiKey = apiKey.includes(':')
     ? apiKey
     : sharedSecret
@@ -113,23 +117,51 @@ async function fetchFromEtsyApi(): Promise<NormalizedListing[]> {
       : apiKey;
   const headers = { 'x-api-key': xApiKey };
   const pageSize = 100;
+  const shopCandidates = Array.from(
+    new Set([shopId, parseShopSlugFromUrl(siteConfig.etsy.shopUrl)].filter(Boolean))
+  );
 
   // Fetch all active listings with pagination
-  const rawListings: EtsyApiListing[] = [];
-  let offset = 0;
-  while (true) {
-    const listingsUrl = `${baseUrl}/listings/active?limit=${pageSize}&offset=${offset}`;
-    const listingsRes = await fetch(listingsUrl, {
-      headers,
-      next: { revalidate: siteConfig.revalidate, tags: [ETSY_CACHE_TAG] },
-    });
-    if (!listingsRes.ok) throw await parseEtsyError(listingsRes, listingsUrl);
-    const listingsJson = await listingsRes.json();
-    const batch: EtsyApiListing[] = listingsJson.results || [];
-    rawListings.push(...batch);
+  let baseUrl = '';
+  let rawListings: EtsyApiListing[] = [];
+  let lastError: Error | null = null;
+  let shopResolved = false;
 
-    if (batch.length < pageSize) break;
-    offset += pageSize;
+  for (const shopRef of shopCandidates) {
+    baseUrl = `https://openapi.etsy.com/v3/application/shops/${shopRef}`;
+    rawListings = [];
+    let offset = 0;
+    let failed = false;
+
+    while (true) {
+      const listingsUrl = `${baseUrl}/listings/active?limit=${pageSize}&offset=${offset}`;
+      const listingsRes = await fetch(listingsUrl, {
+        headers,
+        next: { revalidate: siteConfig.revalidate, tags: [ETSY_CACHE_TAG] },
+      });
+
+      if (!listingsRes.ok) {
+        lastError = await parseEtsyError(listingsRes, listingsUrl);
+        failed = true;
+        break;
+      }
+
+      const listingsJson = await listingsRes.json();
+      const batch: EtsyApiListing[] = listingsJson.results || [];
+      rawListings.push(...batch);
+
+      if (batch.length < pageSize) break;
+      offset += pageSize;
+    }
+
+    if (!failed) {
+      shopResolved = true;
+      break;
+    }
+  }
+
+  if (!shopResolved && lastError) {
+    throw lastError;
   }
 
   // Optionally fetch shop sections for category mapping
