@@ -3,6 +3,8 @@ import { NormalizedListing, ListingsData, ListingImage } from './types';
 import { slugify } from './utils';
 import fallbackData from '@/data/listings.json';
 
+const ETSY_CACHE_TAG = 'etsy-listings';
+
 // ── Category Assignment ──────────────────────────────────────
 
 function assignCategory(tags: string[], materials: string[], section?: string): string {
@@ -93,7 +95,7 @@ async function fetchFromEtsyApi(): Promise<NormalizedListing[]> {
   // Fetch active listings
   const listingsRes = await fetch(`${baseUrl}/listings/active?limit=100`, {
     headers,
-    next: { revalidate: siteConfig.revalidate },
+    next: { revalidate: siteConfig.revalidate, tags: [ETSY_CACHE_TAG] },
   });
   if (!listingsRes.ok) throw new Error(`Etsy API error: ${listingsRes.status}`);
   const listingsJson = await listingsRes.json();
@@ -101,7 +103,10 @@ async function fetchFromEtsyApi(): Promise<NormalizedListing[]> {
   // Optionally fetch shop sections for category mapping
   let sectionsMap: Record<number, string> = {};
   try {
-    const sectionsRes = await fetch(`${baseUrl}/sections`, { headers });
+    const sectionsRes = await fetch(`${baseUrl}/sections`, {
+      headers,
+      next: { revalidate: siteConfig.revalidate, tags: [ETSY_CACHE_TAG] },
+    });
     if (sectionsRes.ok) {
       const sectionsJson = await sectionsRes.json();
       for (const sec of sectionsJson.results || []) {
@@ -116,7 +121,10 @@ async function fetchFromEtsyApi(): Promise<NormalizedListing[]> {
   const rawListings: EtsyApiListing[] = listingsJson.results || [];
   const imageResults = await Promise.allSettled(
     rawListings.map((raw) =>
-      fetch(`https://openapi.etsy.com/v3/application/listings/${raw.listing_id}/images`, { headers })
+      fetch(`https://openapi.etsy.com/v3/application/listings/${raw.listing_id}/images`, {
+        headers,
+        next: { revalidate: siteConfig.revalidate, tags: [ETSY_CACHE_TAG] },
+      })
         .then((res) => (res.ok ? res.json() : { results: [] }))
         .then((json) => ({ listingId: raw.listing_id, images: json.results || [] }))
     )
@@ -213,6 +221,8 @@ export function clearListingsCache(): void {
   cachedListings = null;
   cacheTimestamp = 0;
 }
+
+export { ETSY_CACHE_TAG };
 
 export async function getCuratedListingsByCategory(category: string): Promise<NormalizedListing[]> {
   const listings = await getListings();

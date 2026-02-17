@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { clearListingsCache } from '@/lib/listings';
+import { revalidateTag } from 'next/cache';
+import { clearListingsCache, ETSY_CACHE_TAG } from '@/lib/listings';
 
 export async function POST(req: NextRequest) {
   const token = req.nextUrl.searchParams.get('token');
@@ -8,9 +9,10 @@ export async function POST(req: NextRequest) {
   }
 
   clearListingsCache();
+  revalidateTag(ETSY_CACHE_TAG);
 
   return NextResponse.json({
-    message: 'Listings cache cleared. Next request will fetch fresh data.',
+    message: 'Listings cache cleared and Etsy cache invalidated. Next request will fetch fresh data.',
     timestamp: new Date().toISOString(),
   });
 }
