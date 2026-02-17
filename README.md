@@ -43,7 +43,8 @@ The site works immediately with sample product data — no API keys required.
 
 | Variable | Required | Description |
 |---|---|---|
-| `ETSY_API_KEY` | No | Etsy API key for live listings |
+| `ETSY_API_KEY` | No | Etsy keystring, or `keystring:shared_secret` combined |
+| `ETSY_SHARED_SECRET` | No | Etsy shared secret (optional if combined in `ETSY_API_KEY`) |
 | `ETSY_SHOP_ID` | No | Your Etsy shop numeric ID |
 | `NEXT_PUBLIC_GA_ID` | No | GA4 Measurement ID (G-XXXXXXXXXX) |
 | `RESEND_API_KEY` | No | Resend API key for email delivery |
@@ -57,9 +58,11 @@ The site works immediately with sample product data — no API keys required.
 ### Option A: Live Etsy API
 
 1. Create an Etsy app at https://www.etsy.com/developers/your-apps
-2. Get your API key (v3 key string)
+2. Get your keystring and shared secret
 3. Find your shop ID (numeric) — visit your shop, it's in the URL or use the API
-4. Set `ETSY_API_KEY` and `ETSY_SHOP_ID` in your env
+4. Set either:
+   - `ETSY_API_KEY=keystring:shared_secret` and `ETSY_SHOP_ID=...`, or
+   - `ETSY_API_KEY=keystring`, `ETSY_SHARED_SECRET=shared_secret`, and `ETSY_SHOP_ID=...`
 
 Listings are cached in memory and revalidated every 6 hours via ISR.
 
@@ -68,7 +71,7 @@ Listings are cached in memory and revalidated every 6 hours via ISR.
 If you don't have API access, or want to pre-export:
 
 ```bash
-ETSY_API_KEY=your_key ETSY_SHOP_ID=your_id npm run fetch-listings
+ETSY_API_KEY=your_keystring:your_shared_secret ETSY_SHOP_ID=your_id npm run fetch-listings
 ```
 
 This writes to `src/data/listings.json`. The site uses this file automatically when API keys aren't set.

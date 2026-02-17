@@ -102,11 +102,16 @@ function normalizeEtsyListing(raw: EtsyApiListing, sectionName?: string): Normal
 }
 
 async function fetchFromEtsyApi(): Promise<NormalizedListing[]> {
-  const { apiKey, shopId } = siteConfig.etsy;
+  const { apiKey, sharedSecret, shopId } = siteConfig.etsy;
   if (!apiKey || !shopId) throw new Error('Etsy API key or shop ID not configured');
 
   const baseUrl = `https://openapi.etsy.com/v3/application/shops/${shopId}`;
-  const headers = { 'x-api-key': apiKey };
+  const xApiKey = apiKey.includes(':')
+    ? apiKey
+    : sharedSecret
+      ? `${apiKey}:${sharedSecret}`
+      : apiKey;
+  const headers = { 'x-api-key': xApiKey };
   const pageSize = 100;
 
   // Fetch all active listings with pagination

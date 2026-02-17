@@ -10,6 +10,7 @@ export const siteConfig = {
     shopUrl: 'https://www.etsy.com/shop/KindaSaltyStudio',
     shopId: process.env.ETSY_SHOP_ID || '',
     apiKey: process.env.ETSY_API_KEY || '',
+    sharedSecret: process.env.ETSY_SHARED_SECRET || '',
   },
 
   // Map Etsy tags/sections to site categories
