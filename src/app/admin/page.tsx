@@ -39,6 +39,8 @@ export default function AdminPage() {
   const [removing, setRemoving] = useState<number | null>(null);
   const [confirmId, setConfirmId] = useState<number | null>(null);
   const [toast, setToast] = useState('');
+  const [refreshingListings, setRefreshingListings] = useState(false);
+  const [listingsPanelKey, setListingsPanelKey] = useState(0);
 
   const showToast = (msg: string) => {
     setToast(msg);
@@ -224,6 +226,31 @@ export default function AdminPage() {
       showToast('Network error.');
     } finally {
       setRemoving(null);
+    }
+  };
+
+  const handleRefreshListings = async () => {
+    if (!token) return;
+    setRefreshingListings(true);
+    setError('');
+
+    try {
+      const res = await fetch(`/api/refresh-cache?token=${encodeURIComponent(token)}`, {
+        method: 'POST',
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        showToast(data.error || 'Failed to refresh Etsy listings.');
+        return;
+      }
+
+      setListingsPanelKey((prev) => prev + 1);
+      showToast('Etsy listings refreshed.');
+    } catch {
+      showToast('Network error while refreshing listings.');
+    } finally {
+      setRefreshingListings(false);
     }
   };
 
@@ -703,13 +730,22 @@ export default function AdminPage() {
         {/* ===================== LISTINGS TAB ===================== */}
         {tab === 'listings' && (
           <div className="border border-salt-200 bg-white">
-            <div className="border-b border-salt-200 px-6 py-4">
-              <h2 className="font-display text-xl tracking-tight">Manage Listings</h2>
-              <p className="text-sm text-salt-500 mt-0.5">
-                Choose which Etsy listings appear on the 3D Prints and Laser Engraving pages.
-              </p>
+            <div className="border-b border-salt-200 px-6 py-4 flex flex-wrap items-center justify-between gap-4">
+              <div>
+                <h2 className="font-display text-xl tracking-tight">Manage Listings</h2>
+                <p className="text-sm text-salt-500 mt-0.5">
+                  Choose which Etsy listings appear on the 3D Prints and Laser Engraving pages.
+                </p>
+              </div>
+              <button
+                onClick={handleRefreshListings}
+                disabled={refreshingListings}
+                className="btn-secondary text-xs"
+              >
+                {refreshingListings ? 'Refreshing Etsy...' : 'Refresh Etsy Listings'}
+              </button>
             </div>
-            <AdminPanel token={token} />
+            <AdminPanel key={listingsPanelKey} token={token} />
           </div>
         )}
       </section>
