@@ -107,10 +107,20 @@ export function AdminPanel({ token }: AdminPanelProps) {
     return <div className="px-6 py-12 text-center text-sm text-salt-500">Loading listings...</div>;
   }
 
+  if (message?.type === 'error' && listings.length === 0) {
+    return (
+      <div className="px-6 py-12">
+        <div className="rounded px-4 py-3 text-sm bg-red-50 text-red-700">
+          {message.text}
+        </div>
+      </div>
+    );
+  }
+
   if (listings.length === 0 && !loading) {
     return (
       <div className="px-6 py-12 text-center text-sm text-salt-500">
-        No Etsy listings found. Make sure your ETSY_API_KEY and ETSY_SHOP_ID are configured.
+        No active Etsy listings were returned for this shop.
       </div>
     );
   }

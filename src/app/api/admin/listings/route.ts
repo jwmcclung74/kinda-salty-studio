@@ -12,6 +12,9 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ listings });
   } catch (err) {
     console.error('Admin listings fetch error:', err);
-    return NextResponse.json({ error: 'Failed to fetch listings.' }, { status: 500 });
+    return NextResponse.json(
+      { error: err instanceof Error ? err.message : 'Failed to fetch listings.' },
+      { status: 500 }
+    );
   }
 }
