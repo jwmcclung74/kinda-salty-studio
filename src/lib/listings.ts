@@ -61,6 +61,17 @@ interface GetListingsOptions {
   skipFallback?: boolean;
 }
 
+async function parseEtsyError(res: Response, url: string): Promise<Error> {
+  let details = '';
+  try {
+    const text = await res.text();
+    if (text) details = text.slice(0, 300);
+  } catch {
+    // ignore body parse failure
+  }
+  return new Error(`Etsy API error: ${res.status} at ${url}${details ? ` - ${details}` : ''}`);
+}
+
 function normalizeEtsyListing(raw: EtsyApiListing, sectionName?: string): NormalizedListing {
   const images: ListingImage[] = (raw.images || []).map((img) => ({
     url: img.url_570xN || img.url_fullxfull,
@@ -102,11 +113,12 @@ async function fetchFromEtsyApi(): Promise<NormalizedListing[]> {
   const rawListings: EtsyApiListing[] = [];
   let offset = 0;
   while (true) {
-    const listingsRes = await fetch(`${baseUrl}/listings/active?limit=${pageSize}&offset=${offset}`, {
+    const listingsUrl = `${baseUrl}/listings/active?limit=${pageSize}&offset=${offset}`;
+    const listingsRes = await fetch(listingsUrl, {
       headers,
       next: { revalidate: siteConfig.revalidate, tags: [ETSY_CACHE_TAG] },
     });
-    if (!listingsRes.ok) throw new Error(`Etsy API error: ${listingsRes.status}`);
+    if (!listingsRes.ok) throw await parseEtsyError(listingsRes, listingsUrl);
     const listingsJson = await listingsRes.json();
     const batch: EtsyApiListing[] = listingsJson.results || [];
     rawListings.push(...batch);
