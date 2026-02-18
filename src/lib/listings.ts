@@ -66,6 +66,10 @@ function parseShopSlugFromUrl(url: string): string {
   return match?.[1] || '';
 }
 
+function isNumericId(value: string): boolean {
+  return /^\d+$/.test(value.trim());
+}
+
 async function parseEtsyError(res: Response, url: string): Promise<Error> {
   let details = '';
   try {
@@ -75,6 +79,26 @@ async function parseEtsyError(res: Response, url: string): Promise<Error> {
     // ignore body parse failure
   }
   return new Error(`Etsy API error: ${res.status} at ${url}${details ? ` - ${details}` : ''}`);
+}
+
+async function resolveShopId(shopRef: string, headers: Record<string, string>): Promise<string> {
+  const cleanRef = shopRef.trim();
+  if (isNumericId(cleanRef)) return cleanRef;
+
+  const lookupUrl = `https://openapi.etsy.com/v3/application/shops?shop_name=${encodeURIComponent(cleanRef)}`;
+  const lookupRes = await fetch(lookupUrl, {
+    headers,
+    next: { revalidate: siteConfig.revalidate, tags: [ETSY_CACHE_TAG] },
+  });
+  if (!lookupRes.ok) throw await parseEtsyError(lookupRes, lookupUrl);
+
+  const lookupJson = await lookupRes.json();
+  const resolvedId = lookupJson?.results?.[0]?.shop_id;
+  if (!resolvedId) {
+    throw new Error(`No Etsy shop found for '${cleanRef}'.`);
+  }
+
+  return String(resolvedId);
 }
 
 function normalizeEtsyListing(raw: EtsyApiListing, sectionName?: string): NormalizedListing {
@@ -117,7 +141,7 @@ async function fetchFromEtsyApi(): Promise<NormalizedListing[]> {
       : apiKey;
   const headers = { 'x-api-key': xApiKey };
   const pageSize = 100;
-  const shopCandidates = Array.from(
+  const shopRefs = Array.from(
     new Set([shopId, parseShopSlugFromUrl(siteConfig.etsy.shopUrl)].filter(Boolean))
   );
 
@@ -127,8 +151,16 @@ async function fetchFromEtsyApi(): Promise<NormalizedListing[]> {
   let lastError: Error | null = null;
   let shopResolved = false;
 
-  for (const shopRef of shopCandidates) {
-    baseUrl = `https://openapi.etsy.com/v3/application/shops/${shopRef}`;
+  for (const shopRef of shopRefs) {
+    let resolvedShopId = '';
+    try {
+      resolvedShopId = await resolveShopId(shopRef, headers);
+    } catch (err) {
+      lastError = err instanceof Error ? err : new Error('Failed to resolve Etsy shop ID.');
+      continue;
+    }
+
+    baseUrl = `https://openapi.etsy.com/v3/application/shops/${resolvedShopId}`;
     rawListings = [];
     let offset = 0;
     let failed = false;
