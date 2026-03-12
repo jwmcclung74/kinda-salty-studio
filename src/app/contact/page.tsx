@@ -15,7 +15,7 @@ export default function ContactPage() {
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent mb-2">Get in Touch</p>
         <h1 className="section-heading">Contact Us</h1>
         <p className="section-subheading mb-8">
-          Questions about a product, order, or anything else? Drop us a line and we&apos;ll get back to you.
+          Questions about a product, order, or anything else? Drop us a line and we&apos;ll get back to you as soon as we can.
         </p>
         <ContactForm />
       </div>
