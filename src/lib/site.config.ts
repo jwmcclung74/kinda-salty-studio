@@ -53,7 +53,7 @@ export const siteConfig = {
     { label: 'Laser Engraving', href: '/laser-engraving' },
     { label: 'Custom Orders', href: '/custom-orders' },
     { label: 'About', href: '/about' },
-    { label: 'Contact', href: '/contact' },
+    { label: 'Contact Us', href: '/contact' },
   ],
 
   revalidate: 21600, // 6 hours in seconds
