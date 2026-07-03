@@ -130,6 +130,58 @@ function normalizeEtsyListing(raw: EtsyApiListing, sectionName?: string): Normal
   };
 }
 
+const IMAGE_FETCH_CONCURRENCY = 5;
+const IMAGE_FETCH_MAX_RETRIES = 3;
+
+async function fetchListingImages(
+  listingId: number,
+  headers: Record<string, string>
+): Promise<EtsyApiImage[] | null> {
+  for (let attempt = 0; attempt <= IMAGE_FETCH_MAX_RETRIES; attempt++) {
+    try {
+      const res = await fetch(`https://openapi.etsy.com/v3/application/listings/${listingId}/images`, {
+        headers,
+        next: { revalidate: siteConfig.revalidate, tags: [ETSY_CACHE_TAG] },
+      });
+      if (res.ok) {
+        const json = await res.json();
+        return json.results || [];
+      }
+      // Non-retryable client error (other than rate limiting) — no point retrying
+      if (res.status !== 429 && res.status < 500) return null;
+    } catch {
+      // Network error — fall through to retry
+    }
+    if (attempt < IMAGE_FETCH_MAX_RETRIES) {
+      await new Promise((resolve) => setTimeout(resolve, 300 * 2 ** attempt));
+    }
+  }
+  return null;
+}
+
+// Fetch images for each listing with limited concurrency so we don't burst past
+// Etsy's per-second rate limit and get every request throttled at once.
+async function fetchListingImagesForAll(
+  rawListings: EtsyApiListing[],
+  headers: Record<string, string>
+): Promise<Record<number, EtsyApiImage[]>> {
+  const imageMap: Record<number, EtsyApiImage[]> = {};
+  let nextIndex = 0;
+
+  async function worker() {
+    while (nextIndex < rawListings.length) {
+      const raw = rawListings[nextIndex++];
+      const images = await fetchListingImages(raw.listing_id, headers);
+      if (images !== null) imageMap[raw.listing_id] = images;
+    }
+  }
+
+  const workerCount = Math.min(IMAGE_FETCH_CONCURRENCY, rawListings.length);
+  await Promise.all(Array.from({ length: workerCount }, worker));
+
+  return imageMap;
+}
+
 async function fetchFromEtsyApi(): Promise<NormalizedListing[]> {
   const { apiKey, sharedSecret, shopId } = siteConfig.etsy;
   if (!apiKey || !shopId) throw new Error('Etsy API key or shop ID not configured');
@@ -213,24 +265,8 @@ async function fetchFromEtsyApi(): Promise<NormalizedListing[]> {
     // Non-critical
   }
 
-  // Fetch images for each listing in parallel
-  const imageResults = await Promise.allSettled(
-    rawListings.map((raw) =>
-      fetch(`https://openapi.etsy.com/v3/application/listings/${raw.listing_id}/images`, {
-        headers,
-        next: { revalidate: siteConfig.revalidate, tags: [ETSY_CACHE_TAG] },
-      })
-        .then((res) => (res.ok ? res.json() : { results: [] }))
-        .then((json) => ({ listingId: raw.listing_id, images: json.results || [] }))
-    )
-  );
-
-  const imageMap: Record<number, EtsyApiImage[]> = {};
-  for (const result of imageResults) {
-    if (result.status === 'fulfilled') {
-      imageMap[result.value.listingId] = result.value.images;
-    }
-  }
+  // Fetch images for each listing, throttled with retries to avoid Etsy's rate limit
+  const imageMap = await fetchListingImagesForAll(rawListings, headers);
 
   return rawListings.map((raw) => {
     const rawWithImages = { ...raw, images: imageMap[raw.listing_id] || raw.images };
