@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
+import { clearListingsCache, ETSY_CACHE_TAG } from '@/lib/listings';
 
 function authorize(req: NextRequest): boolean {
   const token =
@@ -83,6 +84,11 @@ export async function POST(req: NextRequest) {
       const listingId = listingIds[i];
       await sql`INSERT INTO curated_listings (listing_id, category, sort_order) VALUES (${listingId}, ${category}, ${i})`;
     }
+
+    // Force a fresh Etsy fetch so newly curated listings don't render with
+    // stale/placeholder images from a previously cached snapshot
+    clearListingsCache();
+    revalidateTag(ETSY_CACHE_TAG);
 
     // Revalidate the category page so changes appear immediately
     const pathMap: Record<string, string> = {
